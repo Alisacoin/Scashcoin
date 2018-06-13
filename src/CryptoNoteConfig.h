@@ -27,7 +27,7 @@ namespace parameters {
 const uint32_t CRYPTONOTE_MAX_BLOCK_NUMBER                   = 500000000;
 const size_t   CRYPTONOTE_MAX_BLOCK_BLOB_SIZE                = 500000000;
 const size_t   CRYPTONOTE_MAX_TX_SIZE                        = 1000000000;
-const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX       = 0xe9;
+const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX       = 0x60e;
 const uint32_t CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW          = 60;
 const uint64_t CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT            = 60 * 60 * 2;
 
@@ -86,23 +86,23 @@ const size_t   FUSION_TX_MIN_INPUT_COUNT                     = 12;
 const size_t   FUSION_TX_MIN_IN_OUT_COUNT_RATIO              = 4;
 
 const uint32_t KEY_IMAGE_CHECKING_BLOCK_INDEX                = 0;
-const uint32_t UPGRADE_HEIGHT_V2                             = 60000;
-const uint32_t UPGRADE_HEIGHT_V3                             = 72500;
+const uint32_t UPGRADE_HEIGHT_V2                             = 50000;
+const uint32_t UPGRADE_HEIGHT_V3                             = 4294967294;
 const unsigned UPGRADE_VOTING_THRESHOLD                      = 90;               // percent
 const uint32_t UPGRADE_VOTING_WINDOW                         = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY;  // blocks
 const uint32_t UPGRADE_WINDOW                                = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY;  // blocks
 static_assert(0 < UPGRADE_VOTING_THRESHOLD && UPGRADE_VOTING_THRESHOLD <= 100, "Bad UPGRADE_VOTING_THRESHOLD");
 static_assert(UPGRADE_VOTING_WINDOW > 1, "Bad UPGRADE_VOTING_WINDOW");
 
-const char     CRYPTONOTE_BLOCKS_FILENAME[]                  = "blocks.bbs";
-const char     CRYPTONOTE_BLOCKINDEXES_FILENAME[]            = "blockindexes.bbs";
-const char     CRYPTONOTE_POOLDATA_FILENAME[]                = "poolstate.bbs";
-const char     P2P_NET_DATA_FILENAME[]                       = "p2pstate.bbs";
-const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.bbs.json";
+const char     CRYPTONOTE_BLOCKS_FILENAME[]                  = "blocks.Scash";
+const char     CRYPTONOTE_BLOCKINDEXES_FILENAME[]            = "blockindexes.Scash";
+const char     CRYPTONOTE_POOLDATA_FILENAME[]                = "poolstate.Scash";
+const char     P2P_NET_DATA_FILENAME[]                       = "p2pstate.Scash";
+const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.Scash.json";
 } // parameters
 
-const char     CRYPTONOTE_NAME[]                             = "BBSCoin";
-
+const char     CRYPTONOTE_NAME[]                             = "ScashCoin";
+const char GENESIS_COINBASE_TX_HEX[]                         = "013c01ff0001ffffffffffff0f029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101a5d2baed175e1b5b858d5ab99a959e0926ab383e3f0bfca6283fb0a5bfaff37e";
 const uint8_t  TRANSACTION_VERSION_1                         =  1;
 const uint8_t  TRANSACTION_VERSION_2                         =  2;
 const uint8_t  CURRENT_TRANSACTION_VERSION                   =  TRANSACTION_VERSION_1;
@@ -116,8 +116,8 @@ const size_t   BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT        =  10000;  //by def
 const size_t   BLOCKS_SYNCHRONIZING_DEFAULT_COUNT            =  100;    //by default, blocks count in blocks downloading
 const size_t   COMMAND_RPC_GET_BLOCKS_FAST_MAX_COUNT         =  1000;
 
-const int      P2P_DEFAULT_PORT                              =  11204;
-const int      RPC_DEFAULT_PORT                              =  21204;
+const int      P2P_DEFAULT_PORT                              =  11208;
+const int      RPC_DEFAULT_PORT                              =  21208;
 
 const size_t   P2P_LOCAL_WHITE_PEERLIST_LIMIT                =  1000;
 const size_t   P2P_LOCAL_GRAY_PEERLIST_LIMIT                 =  5000;
@@ -135,19 +135,15 @@ const size_t   P2P_DEFAULT_HANDSHAKE_INVOKE_TIMEOUT          = 5000;          //
 const char     P2P_STAT_TRUSTED_PUB_KEY[]                    = "8f80f9a5a434a9f1510d13336228debfee9c918ce505efe225d8c94d045fa115";
 
 const char* const SEED_NODES[] = { 
-  "seed.bbscoin.xyz:11204", 
-  "1.seed.bbscoin.xyz:11204", 
-  "2.seed.bbscoin.xyz:11204", 
-  "3.seed.bbscoin.xyz:11204", 
-  "4.seed.bbscoin.xyz:11204", 
-  "5.seed.bbscoin.xyz:11204", 
-  "6.seed.bbscoin.xyz:11204", 
-  "7.seed.bbscoin.xyz:11204", 
-  "8.seed.bbscoin.xyz:11204", 
-  "9.seed.bbscoin.xyz:11204", 
-  "10.seed.bbscoin.xyz:11204", 
-  "173.82.151.145:11204", 
-  "45.77.187.229:11204" 
+ 
+    "149.129.129.195:11208",
+    "128.1.163.44:11208", 
+	"47.90.253.90:11208", 
+	"162.247.97.107:11208", 
+	"47.74.153.35:11208", 
+	"128.1.164.37:11208", 
+	"47.105.109.220:11208", 
+    "128.1.164.37:11208" 
 };
 
 struct CheckpointData {
@@ -156,12 +152,7 @@ struct CheckpointData {
 };
 
 const std::initializer_list<CheckpointData> CHECKPOINTS = {
-    {54606, "18a155e5ae0a1b4992518698d1271382b566c49ed859540f3c81dc46fa5b89f6"},
-    {60000, "dd02fb33f84443584e0432c28df61b372382c9a20542a5cb6b655a7932bd7d58"},
-    {63600, "41c73113de2a37ae3a543c79083d4e509713a70a53ae5e7c70fcea641c396c56"},
-    {64550, "8554549b78dc831fdca2b46cbef83729e0288a1997998c19fcb37e17164689c7"},
-    {72580, "9fb75a9b219f884afc75c2fba08ac31ffe8ec5a188da3694edce9b094bd3741f"},
-    {94730, "ec4e91d22603815601ece440e045c5f73da41b085468a1239757795a5887f3b4"}
+
 };
 
 } // CryptoNote
